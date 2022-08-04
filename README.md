@@ -1,10 +1,10 @@
 # EasyVtuber
 ![](assets/sample_luda.gif)
 
-- Facial landmark와 GAN을 이용한 Character Face Generation 
-- Google Meets, Zoom 등에서 자신만의 웹툰, 만화 캐릭터로 대화해보세요!
-- 악세사리는 어느정도 추가해도 잘 작동해요!
-- 안타깝게도 RTX 2070 미만에서는 실시간으로 잘 작동하지 않을 수도 있어요 ㅠㅠ
+利用Facial landmark和GAN的Character Face Generation
+请在Google Meets, Zoom等用自己独有的网络漫画，漫画人物进行对话!
+饰品加多少都能正常工作!
+不幸的是，RTX 2070以下可能无法实时启动
 
 <br/><br/>
 
@@ -24,26 +24,26 @@
 <br/><br/>
 
 ## Quick Start
-- ※ 이 프로젝트는 사용 전 OBS 설치가 필수입니다
-- 아래 설치 순서를 __꼭__ 지켜주세요!
+- ※ 这个项目在使用前必须先安装OBS
+- 请一定要遵守下面的设置顺序!
 
-1. [OBS studio 설치](<https://obsproject.com/ko>)
-   - OBS virtualcam을 사용하기 위해서 먼저 OBS Studio를 설치해야합니다
+1. [OBS studio 设置](<https://obsproject.com/ko>)
+   - 为了使用OBS virtualcam，首先要安装OBS Studio
 2. ```pip install -r requirements.txt```
-   - OBS virtualcam을 설치되어있어야 requirements에 포함된 pyvirtualcam이 정상적으로 설치되어 사용할 수 있습니다
+   - 必须安装OBS virtualcam才能正常安装并使用requirements中包含的pyvirtualcam
 3. [pretrianed model download](<https://www.dropbox.com/s/tsl04y5wvg73ij4/talking-head-anime-2-model.zip?dl=0>)
-   - 아래 파일들을 pretrained folder에 넣어주세요
+   - 请把下面的文件放进pretrained folder
      - `combiner.pt`
      - `eyebrow_decomposer.pt`
      - `eyebrow_morphing_combiner.pt`
      - `face_morpher.pt`
      - `two_algo_face_rotator.pt`
-4. character image를 character folder에 넣어주세요
-   - character image 파일은 다음의 조건을 충족해야합니다
-     - alpha 채널을 포함할 것(png 확장자)
-     - 1명의 인간형 캐릭터일 것
-     - 캐릭터가 정면을 볼 것
-     - 캐릭터의 머리가 128 x 128 pixel 내에 들어올 것 (기본적으로 256 x 256으로 resize되기 때문에 256 x 256 기준 128x128 안에 들어와야함)
+4. 请把character image放进character folder
+   - character image文件必须满足以下条件
+     - 包含alpha频道(png扩展名)
+     - 一个人形的角色
+     - 正面
+     - 角色的头部将在128x128 pixel内(因为基本是256 x 256是resize，所以256 x 256必须是128x128)
     
     <p align="center">
         <img src="./assets/img.png" alt="Example image is refenced by TalkingHeadAnime2" width="50%" height="50%"/>
@@ -51,26 +51,26 @@
 
 
 5.`python main.py --webcam_output`
-   - 실제 facial feature가 어떻게 잡히는지 보고 싶다면 `--debug` 옵션을 추가하여 실행해주세요
+   - 如果你想看看实际的facial feature是怎么捕捉的，请单击 debug 选项来执行
 
 
 <br/><br/>
 
 ## How to make Custom Character
-1. 네이버, 구글 등에서 본인이 원하는 캐릭터를 찾으세요!
-   - 되도록이면 위의 4가지 조건을 맞춰주세요!
+1. 请在naver、谷歌等网站上寻找自己喜欢的角色!
+-请尽量满足上面四个条件!
 ![google search](assets/01_sample_search.gif)
 <br/><br/>
-2. 찾은 이미지에서 캐릭터 얼굴이 중앙으로 가도록 가로세로 1:1 비율로 이미지를 잘라주세요!
-   - [이미지 잘라내기 사이트](https://iloveimg.com/ko/crop-image) 광고아님 X
+2. 在找到的图片中，为了让角色的脸向中央，请以长宽1:1的比例剪掉!
+-[形象剪切网站](https://iloveimg/ko/crop-image)
 ![crop image](assets/02_sample_crop.gif)
 <br/><br/>
-3. 이미지 배경을 제거해서 alpha 채널을 만들어 주세요!
-   - [배경제거 사이트](https://remove.bg/ko) 광고아님 X
+3. 删除图像背景，创建alpha频道!
+   - [背景去除网站](https://remove.bg/ko)
 ![google search](assets/03_sample_remove_backgroud.gif)
 <br/><br/>
-4. 완성!
-   - character folder에 이미지를 넣고 `python main.py --output_webcam --character (.png_제외한_캐릭터파일_이름)` 실행!
+4. 完成!
+   - 将图像放入character folder `python main.py --output_webcam --character (.png_之外的_角色文件名)` 继续!
 
 <br/><br/>
 
@@ -91,14 +91,14 @@
 <br/><br/>
 
 ## Usage
-### webcam으로 송출 시
+### 传送到webcam时
 - `python main.py --output_webcam`
-### 캐릭터 지정
-- `python main.py --character (character folder에 있는 .png를 제외한 캐릭터 파일 이름)`
+### 指定角色
+- `python main.py --character (除character folder 中.png以外的角色文件名称)`
 ### facial feature 확인 시
 - `python main.py --debug`
-### 동영상 파일 inference
-- `python main.py --input video파일_경로 --output_dir frame_저장할_디렉토리`
+### 视频文件 inference
+- `python main.py --input video 文件路径 --output_dir frame_要保存的_目录`
 
 <br/><br/>
 
@@ -115,5 +115,5 @@
 <br/><br/>
 
 ## Acknowledgements
-- EasyVtuber는 [TalkingHeadAnime2](<https://github.com/pkhungurn/talking-head-anime-2-demo>)를 기반으로 제작되었습니다. 
-- tha2 folder의 source와 pretrained model file은 원저작자 repo의 Liscense를 확인하고 사용하시기 바랍니다.
+- EasyVtuber [TalkingHeadAnime2](<https://github.com/pkhungurn/talking-head-anime-2-demo>)基于. 
+- 请确认并使用tha2 folder의 source와 pretrained model file은 원저작자 repo의 Liscense
